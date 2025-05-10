@@ -17,13 +17,10 @@ import {
   AccordionTrigger,
 } from "../components/ui/accordion";
 import { Skeleton } from "../components/ui/Skeleton";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Mail, Phone } from "lucide-react";
 
 const memberships = [
-  { 
-    name: "DIE LINKE.", 
-    image: "/images/mitgliedschaften/partei.png", 
-    website: "https://www.die-linke.de" 
-  },
   { 
     name: "Rosa-Luxemburg-Stiftung Niedersachsen", 
     image: "/images/mitgliedschaften/rls.png", 
@@ -342,7 +339,6 @@ export default function HomePage() {
               <h2 className="text-4xl font-[var(--font-work-sans)] font-black text-white">Büros</h2>
             </div>
           </div>
-          
           {/* Right cards grid */}
           <div className="md:w-1/2 p-6 bg-[var(--dunkelrot)]">
             {/* Decorative radial gradients */}
@@ -355,76 +351,116 @@ export default function HomePage() {
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Büro im Bundestag */}
-          <div className="bg-white border rounded-lg shadow-sm flex flex-col items-start overflow-hidden">
-            <Image
-              src="/images/bueros/bundestag.png"
-              alt="Büro im Bundestag"
-              width={320}
-              height={180}
-              className="w-full h-32 object-cover"
-              priority
-            />
-            <div className="p-6 w-full">
-              <h3 className="font-[var(--font-work-sans)] font-black text-lg mb-2">Büro im Bundestag</h3>
-              <ul className="font-[var(--font-inter)] text-sm space-y-1">
-                <li>Platz der Republik 1, 11011 Berlin</li>
-                <li>Tel: 030 227 78 200</li>
-              </ul>
-            </div>
-          </div>
-          {/* Wahlkreisbüro Osnabrück */}
-          <div className="bg-white border rounded-lg shadow-sm flex flex-col items-start overflow-hidden">
-            <Image
-              src="/images/bueros/osnabrueck.png"
-              alt="Wahlkreisbüro Osnabrück"
-              width={320}
-              height={180}
-              className="w-full h-32 object-cover"
-              priority
-            />
-            <div className="p-6 w-full">
-              <h3 className="font-[var(--font-work-sans)] font-black text-lg mb-2">Wahlkreisbüro Osnabrück</h3>
-              <ul className="font-[var(--font-inter)] text-sm space-y-1">
-                <li>Parkstraße 24a, 49080 Osnabrück</li>
-                <li>Tel: 0541 800 94710</li>
-              </ul>
-            </div>
-          </div>
-          {/* Büro Aurich */}
-          <div className="bg-white border rounded-lg shadow-sm flex flex-col items-start overflow-hidden">
-            <Image
-              src="/images/bueros/aurich.png"
-              alt="Büro Aurich"
-              width={320}
-              height={180}
-              className="w-full h-32 object-cover"
-              priority
-            />
-            <div className="p-6 w-full">
-              <h3 className="font-[var(--font-work-sans)] font-black text-lg mb-2">Büro Aurich</h3>
-              <ul className="font-[var(--font-inter)] text-sm space-y-1">
-                <li>Zum Fernsehturm 17, 26605 Aurich</li>
-              </ul>
-            </div>
-          </div>
-          {/* Büro Hameln */}
-          <div className="bg-white border rounded-lg shadow-sm flex flex-col items-start overflow-hidden">
-            <Image
-              src="/images/bueros/hameln.png"
-              alt="Büro Hameln"
-              width={320}
-              height={180}
-              className="w-full h-32 object-cover"
-              priority
-            />
-            <div className="p-6 w-full">
-              <h3 className="font-[var(--font-work-sans)] font-black text-lg mb-2">Büro Hameln</h3>
-              <ul className="font-[var(--font-inter)] text-sm space-y-1">
-                <li>Domeierstr. 6, 31785 Hameln</li>
-              </ul>
-            </div>
-          </div>
+              {/* Office Cards - now clickable and open modal */}
+              {[
+                {
+                  key: "hameln",
+                  name: "Büro Hameln",
+                  image: "/images/bueros/hameln.png",
+                  modal: {
+                    heading: "Büro Hameln",
+                    details: (
+                      <div className="text-base font-[var(--font-inter)]">
+                        <div>Heidi Reichinnek, MdB<br/>Domeierstr. 6<br/>31785 Hameln</div>
+                        <div className="mt-2 font-bold">Kontakt:</div>
+                        <div className="text-sm font-normal">
+                          Felix Mönkemeyer<br/>
+                          <a href="mailto:heidi.reichinnek.ma06@bundestag.de" className="underline inline-flex items-center gap-1"><Mail size={14} /> heidi.reichinnek.ma06@bundestag.de</a>
+                        </div>
+                      </div>
+                    )
+                  }
+                },
+                {
+                  key: "aurich",
+                  name: "Büro Aurich",
+                  image: "/images/bueros/aurich.png",
+                  modal: {
+                    heading: "Büro Aurich",
+                    details: (
+                      <div className="text-base font-[var(--font-inter)]">
+                        <div>Heidi Reichinnek, MdB<br/>Zum Fernsehturm 17<br/>26605 Aurich</div>
+                        <div className="mt-2 font-bold">Kontakt:</div>
+                        <div className="text-sm font-normal">
+                          Laura Schlutter<br/>
+                          <a href="mailto:heidi.reichinnek.ma05@bundestag.de" className="underline inline-flex items-center gap-1"><Mail size={14} /> heidi.reichinnek.ma05@bundestag.de</a>
+                        </div>
+                      </div>
+                    )
+                  }
+                },
+                {
+                  key: "osnabrueck",
+                  name: "Wahlkreisbüro Osnabrück",
+                  image: "/images/bueros/osnabrueck.png",
+                  modal: {
+                    heading: "Wahlkreisbüro Osnabrück",
+                    details: (
+                      <div className="text-base font-[var(--font-inter)]">
+                        <div>Heidi Reichinnek, MdB<br/>Parkstraße 24a,<br/>49080 Osnabrück</div>
+                        <div className="mt-2 font-bold">Kontakt:</div>
+                        <div className="text-sm font-normal">
+                          Anke Kuhn<br/>
+                          <span className="inline-flex items-center gap-1"><Phone size={14} />0541 800 94710</span>
+                        </div>
+                      </div>
+                    )
+                  }
+                },
+                {
+                  key: "bundestag",
+                  name: "Büro im Bundestag",
+                  image: "/images/bueros/bundestag.png",
+                  modal: {
+                    heading: "Büro im Bundestag",
+                    details: (
+                      <div className="text-base font-[var(--font-inter)]">
+                        <div>Heidi Reichinnek, MdB<br/>Platz der Republik 1<br/>11011 Berlin</div>
+                        <div className="mt-2 font-bold">Kontakt:</div>
+                        <div className="flex flex-col gap-1 text-sm font-normal">
+                          <span>Jeanette Tittel<br/><a href="mailto:heidi.reichinnek@bundestag.de" className="underline inline-flex items-center gap-1"><Mail size={14} />heidi.reichinnek@bundestag.de</a></span>
+                          <span><Phone size={14} />030 227 78 200</span>
+                        </div>
+                      </div>
+                    )
+                  }
+                }
+              ].map(office => (
+                <Dialog.Root key={office.key}>
+                  <Dialog.Trigger asChild>
+                    <button className="bg-white border rounded-lg shadow-sm flex flex-col items-start overflow-hidden cursor-pointer transition hover:shadow-lg focus:outline-none">
+                      <Image
+                        src={office.image}
+                        alt={office.name}
+                        width={320}
+                        height={180}
+                        className="w-full h-32 object-cover"
+                        priority
+                      />
+                      <div className="p-6 w-full">
+                        <h3 className="font-[var(--font-work-sans)] font-black text-lg mb-2">{office.name}</h3>
+                      </div>
+                    </button>
+                  </Dialog.Trigger>
+                  <Dialog.Portal>
+                    <Dialog.Overlay className="fixed inset-0 bg-black/40 z-50 backdrop-blur-sm" />
+                    <Dialog.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-lg border border-white/30 rounded-xl shadow-2xl flex w-full max-w-2xl min-h-[320px] max-h-[90vh] overflow-hidden">
+                      {/* Left: Image */}
+                      <div className="flex-shrink-0 w-1/2 h-full relative min-h-[320px]">
+                        <Image src={office.image} alt={office.name} fill className="object-cover w-full h-full" />
+                      </div>
+                      {/* Right: Content */}
+                      <div className="flex-1 flex flex-col p-8 justify-center">
+                        <Dialog.Title className="font-[var(--font-work-sans)] font-light text-2xl mb-4">{office.modal.heading}</Dialog.Title>
+                        {office.modal.details}
+                        <Dialog.Close asChild>
+                          <button className="absolute top-4 right-4 text-black/60 hover:text-black text-2xl font-bold focus:outline-none">×</button>
+                        </Dialog.Close>
+                      </div>
+                    </Dialog.Content>
+                  </Dialog.Portal>
+                </Dialog.Root>
+              ))}
             </div>
           </div>
         </div>
