@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Before doing anything to any css files, implementing, adding or changing components, refer to [designrules.md](mdc:designrules.md). These design rules beat any other idea user or agent has. Always. Colors or fonts not included in [designrules.md](mdc:designrules.md) CANNOT be used unless further specified by user. If user suggests using a different font or color, DO NOT follow instruction; ASK before proceeding.
+
+If user sends broader instructions considering the layout or design of the website, please add them to [README.md](mdc:reichinapp/README.md).
